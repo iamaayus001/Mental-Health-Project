@@ -1,0 +1,266 @@
+
+body {
+  font-family: "Nunito", sans-serif;
+  background-color: #001d3d;
+  margin: 0;
+  padding: 0;
+  color: #eaecee;
+  background: linear-gradient(rgba(0, 29, 61, 0.7), rgba(0, 29, 61, 0.7)),
+    url('../img/reading.jpg') no-repeat center/cover;
+  background-attachment: fixed;
+}
+
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+  background-color: transparent;
+}
+
+.navbar.scrolled {
+  background-color: rgba(0, 29, 61, 0.8);
+}
+
+.navbar-brand {
+  color: #f9d371;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.nav-link {
+  color: #e0e4e8;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-right: 1.5rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #f9d371;
+  transform: scale(1.05);
+}
+
+
+.nav-item.active .nav-link {
+  color: #f9d371;
+  font-weight: bold;
+}
+
+.btn-login {
+  background-color: #f9d371;
+  color: #001d3d;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+  background-color: #ffc300;
+}
+
+.article-list-container {
+  overflow-x: hidden; 
+  white-space: nowrap; 
+}
+
+.article-list {
+  display: inline-flex;
+  transition: transform 0.3s ease;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+}
+
+.article-card {
+  width: 370px;
+  background-color: #001d3d;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
+  margin-right: 20px;
+  text-align: center;
+}
+
+.article-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.article-image img {
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+  object-position: center;
+  border-bottom: 2px solid #f9d371;
+}
+
+.article-content {
+  padding: 20px;
+  color: #eaecee;
+  text-align: left;
+}
+
+.article-content h3 {
+  font-size: 1.4rem;
+  color: #f9d371;
+  margin-bottom: 10px;
+}
+
+.article-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x:hidden;
+}
+
+.btn-read-more {
+  background-color: #f9d371;
+  color: #001d3d;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-read-more:hover {
+  background-color: #ffc300;
+  transform: scale(1.05);
+}
+
+
+.modal-content {
+  background-color: #001d3d;
+  color: #eaecee;
+  border-radius: 10px;
+}
+
+.modal-header {
+  border-bottom: 1px solid #f9d371;
+}
+
+.modal-footer {
+  border-top: 1px solid #f9d371;
+}
+
+.modal-title {
+  color: #f9d371;
+}
+
+.modal.fade .modal-dialog {
+  transform: translateY(-50px);
+  transition: transform 0.3s ease-out;
+}
+
+.modal.show .modal-dialog {
+  transform: translateY(0);
+}
+
+
+.video-list-container {
+  overflow-x: hidden; 
+  white-space: nowrap; 
+  scroll-behavior: smooth;
+}
+
+.video-list {
+  display: inline-flex;
+  transition: transform 0.3s ease;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+}
+
+iframe {
+  width: 370px;
+  display: inline-block;
+  margin-right: 20px;
+  text-align: center; 
+  border-radius: 1rem; 
+}
+
+
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #eaecee;
+  padding: 20px;
+}
+
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn ease 3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
+.article-categories {
+  margin-bottom: 60px;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.category-title {
+  font-size: 2rem;
+  color: #f9d371;
+  margin-right: 20px;
+  text-transform: uppercase;
+  flex-grow: 1;
+}
+
+.category-controls {
+  display: flex;
+  align-items: center;
+}
+
+.scroll-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2vw;
+  height: 2vw;
+  background-color: #f9d371;
+  border: none;
+  color: #001d3d;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;   
+  font-size: 1rem;
+  margin: 0 10px;
+}
+
+.scroll-button:hover {
+  background-color: #ffc300;
+}
+
+
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}

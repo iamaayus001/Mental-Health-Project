@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleep - CalmSpace</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Nunito:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../CSS/sleep.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fade-in">
+      <div class="container">
+        <a class="navbar-brand" href="home.html">CalmSpace</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html"
+                ><i class="fas fa-home"></i> Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="meditation.html"
+                ><i class="fas fa-yin-yang"></i> Meditation</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="sleep.html"
+                ><i class="fas fa-bed"></i> Sleep</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="resources.html"
+                ><i class="fas fa-book"></i> Resources</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="login.html"
+                ><button class="btn-login">Log out</button></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero fade-in">
+      <h1>Relax for Better Sleep</h1>
+      <p>Drift into a deep, restful sleep with calming music and sounds.</p>
+    </div>
+
+    <!-- Featured Video Section -->
+    <div class="container mt-5 fade-in">
+      <h2 class="featured-video">Featured Video</h2>
+      <div class="featured-video-container">
+        <div id="featured-video"></div>
+      </div>
+    </div>
+
+    <!-- Categories Section -->
+    <div class="container mt-5 video-categories">
+      <div class="category">
+        <h2 class="category-title">Sleep Music</h2>
+        <div class="category-controls">
+          <button class="scroll-button left">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="scroll-button right">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      <div class="video-list-container">
+        <div class="video-list" id="sleep-music"></div>
+      </div>
+    </div>
+
+    <div class="container mt-5 video-categories">
+      <div class="category">
+        <h2 class="category-title">Bedtime Stories</h2>
+        <div class="category-controls">
+          <button class="scroll-button left">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="scroll-button right">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      <div class="video-list-container">
+        <div class="video-list" id="bedtime-stories"></div>
+      </div>
+    </div>
+
+    <div class="container mt-5 video-categories">
+      <div class="category">
+        <h2 class="category-title">Guided Sleep Meditation</h2>
+        <div class="category-controls">
+          <button class="scroll-button left">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="scroll-button right">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      <div class="video-list-container">
+        <div class="video-list" id="sleep-meditation"></div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      const apiKey = "AIzaSyCUQdGnzBaboOLRkn9xMXGRX5KFIZ1iWX0";
+      const playlistIds = {
+        "sleep-music": "PLQ_PIlf6OzqIeQygYMd8DccQ3XnJlSGcG",
+        "bedtime-stories": "PL-M8LfrSExhpPg9tVezKF3kRTjY8ttqP9",
+        "sleep-meditation": "PLwRp13WDIrMPzLqtyvvPrs7sMR_lvZ8Bf",
+      };
+      const maxResults = 5;
+
+      const featuredVideoId = "lh4JdZTJe7k";
+
+      function loadFeaturedVideo() {
+        const featuredVideoContainer =
+          document.getElementById("featured-video");
+        featuredVideoContainer.innerHTML = `
+          <iframe width="100%" height="600" src="https://www.youtube.com/embed/${featuredVideoId}" frameborder="0" allowfullscreen></iframe>
+        `;
+      }
+
+      function fetchVideos(playlistId, containerId) {
+        fetch(
+          `https://www.googleapis.com/youtube/v3/playlistItems?key=${apiKey}&playlistId=${playlistId}&part=snippet&maxResults=${maxResults}`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            const videoListContainer = document.getElementById(containerId);
+            videoListContainer.innerHTML = "";
+            data.items.forEach((video) => {
+              const videoId = video.snippet.resourceId.videoId;
+              const videoTitle = video.snippet.title;
+              const videoFrame = `
+          <div class="video-item">
+            <iframe width="400" height="220" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+            <div class="video-title">${videoTitle}</div>
+          </div>`;
+              videoListContainer.innerHTML += videoFrame;
+            });
+          })
+          .catch((error) => console.error("Error fetching videos:", error));
+      }
+
+      // Load the featured video on page load
+      loadFeaturedVideo();
+
+      Object.entries(playlistIds).forEach(([category, id]) => {
+        fetchVideos(id, `${category.toLowerCase().replace(/ /g, "-")}`);
+      });
+
+      window.onscroll = function () {
+        const navbar = document.querySelector(".navbar");
+        if (
+          document.body.scrollTop > 50 ||
+          document.documentElement.scrollTop > 50
+        ) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      };
+
+      // Scroll Functionality for Video List
+      function handleScroll(container, direction) {
+        const scrollAmount = 300;
+
+        if (direction === "left") {
+          container.scrollLeft -= scrollAmount;
+        } else if (direction === "right") {
+          container.scrollLeft += scrollAmount;
+        }
+      }
+
+      document.querySelectorAll(".scroll-button").forEach((button) => {
+        button.addEventListener("click", function () {
+          const videoListContainer =
+            this.closest(".category").nextElementSibling;
+          const direction = this.classList.contains("left") ? "left" : "right";
+          handleScroll(videoListContainer, direction);
+        });
+      });
+    </script>
+  </body>
+</html>
